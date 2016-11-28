@@ -1,0 +1,61 @@
+{
+  "name": "gapsapp",
+  "version": "1.0.0",
+  "description": "GAPS App",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Randy Lexvold <rlexvold@gmail.com",
+  "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=production NODE_PATH=$NODE_PATH:./shared node --harmony .",
+    "dev": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
+    "build": "webpack --progress --color -p --config webpack.prod.config.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.6.0",
+    "eslint": "^3.11.0",
+    "eslint-config-google": "^0.7.0",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-mocha": "^4.7.0",
+    "eslint-plugin-react": "^6.7.1",
+    "mocha": "^3.2.0",
+    "react-transform-hmr": "^1.0.4",
+    "webpack-dev-middleware": "^1.8.4"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-class-properties": "^6.19.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-plugin-transform-object-rest-spread": "^6.19.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "express": "^4.14.0",
+    "history": "^4.4.1",
+    "immutable": "^3.8.1",
+    "object-assign": "^4.1.0",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "react-redux": "^4.4.6",
+    "react-router": "^3.0.0",
+    "redux": "^3.6.0",
+    "webpack": "^1.13.3"
+  }
+}
