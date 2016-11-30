@@ -20,12 +20,11 @@ var _ = require('underscore');
 
 var config = require('./config');
 var routes = require('./app/routes');
-var Character = require('./models/character');
 var Foods = require('./models/food')
 
 var app = express();
 
-mongoose.connect(config.database);
+mongoose.connect('mongodb://gapsapp:Lutef1sk@ds111178.mlab.com:11178/lifetech');
 mongoose.connection.on('error', function() {
     console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
 });
