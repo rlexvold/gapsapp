@@ -1,2 +1,14 @@
 node_modules
-dist/bundle.js
+bower_components
+
+# Users Environment Variables
+.lock-wscript
+
+# Project
+.idea
+*.iml
+.DS_Store
+
+# Compiled files
+public/css/*
+public/js/*%
