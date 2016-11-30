@@ -1,10 +1,13 @@
 {
-  "name": "newedenfaces",
-  "description": "Character voting app for EVE Online",
-  "version": "1.0.0",
+  "name": "gapsapp",
+  "description": "GAPS Diet App",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/newedenfaces-react"
+    "url": "https://github.com/rlexvold/gapsapp"
+  },
+  "engines": {
+    "node": "7.2.0"
   },
   "main": "server.js",
   "scripts": {
