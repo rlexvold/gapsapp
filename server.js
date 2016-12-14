@@ -1,12 +1,15 @@
 var log = require('./utils/logger')
 var express = require('express')
 var morgan = require('morgan')
+var config = require('config')
 
 var app = express()
 
 app.use(morgan('combine', {stream: log.stream}))
 
-log.info('info log')
+log.debug('NODE_ENV: ' + app.get('env'))
+
+log.debug(JSON.stringify(config))
 
 // development error handler
 // will print stacktrace

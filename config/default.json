@@ -1,0 +1,15 @@
+{
+    "Auth": {
+        "ClientID": "LYcbp3kFFNrTdgkQT7BbMXiJfIG898bF",
+        "Domain": "lifetech.auth0.com"
+    },
+    "Server": {
+        "Port": 3000
+    },
+    "Database": {
+        "URI": "mongodb://gapsapp:Lutef1sk@ds111178.mlab.com:11178/lifetech"
+    },
+    "Logging": {
+        "Level": "info"
+    }
+}

@@ -3,6 +3,11 @@ var assert = require('assert')
 var describe = require('mocha').describe
 var it = require('mocha').it
 var db = require('../server/db/mongo')
+var config = require('config')
+
+log.debug('NODE_ENV: ' + process.env.NODE_ENV)
+
+log.debug(JSON.stringify(config))
 
 describe('Database Tests', function() {
     describe('Connection Security', function() {

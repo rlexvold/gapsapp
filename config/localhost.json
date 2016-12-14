@@ -1,0 +1,8 @@
+{
+    "Database": {
+        "URI": "mongodb://localhost:27017/lifetech"
+    },
+    "Logging": {
+        "Level": "trace"
+    }
+}

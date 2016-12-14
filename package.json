@@ -8,16 +8,17 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "watch": "nodemon server.js",
-    "test": "node ./node_modules/mocha/bin/mocha"
+    "start": "NODE_ENV=localhost node server.js",
+    "watch": "NODE_ENV=localhost nodemon server.js",
+    "test": "NODE_ENV=test node ./node_modules/mocha/bin/mocha"
   },
   "dependencies": {
+    "bristol": "*",
     "bson-ext": "*",
+    "config": "*",
     "debug": "*",
     "express": "*",
     "mongodb": "*",
-    "bristol": "*",
     "morgan": "*"
   },
   "devDependencies": {

@@ -1,10 +1,14 @@
 var log = require('../../utils/logger')
 var MongoClient = require('mongodb').MongoClient
+var config = require('config')
 var db
 
-MongoClient.connect("mongodb://localhost:27017", function(err, database) {
+var connectString = config.Database.URI
+log.debug('Connecting to ' + connectString)
+MongoClient.connect(connectString, function(err, database) {
     if (err)
         throw err;
+    log.debug('Connection successful')
     db = database;
 });
 
