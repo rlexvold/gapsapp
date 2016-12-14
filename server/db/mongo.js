@@ -1,16 +1,27 @@
 var log = require('../../utils/logger')
+var util = require('util')
+var assert = require('assert')
 var MongoClient = require('mongodb').MongoClient
-var config = require('config')
 var db
+var client = new MongoClient()
 
-var connectString = config.Database.URI
-log.debug('Connecting to ' + connectString)
-MongoClient.connect(connectString, function(err, database) {
-    if (err)
-        throw err;
-    log.debug('Connection successful')
-    db = database;
-});
+function connect(config) {
+    var connectString
+    close()
+    if (config.Database.Username)
+        connectString = util.format('mongodb://%s:%s@%s:%s/%s', config.Database.Username, config.Database.Password, config.Database.URI, config.Database.Port, config.Database.DatabaseName)
+    else
+        connectString = util.format('mongodb://%s:%s/%s', config.Database.URI, config.Database.Port, config.Database.DatabaseName)
+    log.debug('Connecting to ' + connectString)
+
+    client.connect(connectString, {
+        poolSize: 10
+    }, function(err, database) {
+        assert.equal(null, err)
+        log.debug('Connection successful')
+        db = database
+    })
+}
 
 function close() {
     if (db) {
@@ -19,3 +30,4 @@ function close() {
     }
 }
 module.exports.close = close
+module.exports.connect = connect

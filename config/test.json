@@ -1,8 +1,15 @@
 {
+  "Database": {
+      "URI": "localhost",
+      "Port": "27017",
+      "Username": "",
+      "Password": "",
+      "DatabaseName": "lifetech"
+  },
   "Server": {
       "Port": 3000
   },
   "Logging": {
-      "Level": "debug"
+      "Level": "trace"
   }
 }

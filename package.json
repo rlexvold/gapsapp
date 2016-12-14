@@ -22,10 +22,11 @@
     "morgan": "*"
   },
   "devDependencies": {
+    "chai": "*",
+    "chai-as-promised": "^6.0.0",
     "eslint": "*",
     "eslint-config-google": "*",
     "eslint-plugin-react": "*",
-    "chai": "*",
     "mocha": "*"
   },
   "license": "MIT"

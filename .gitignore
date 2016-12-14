@@ -1,12 +1,7 @@
 node_modules
 bower_components
+*.log
 
-# Users Environment Variables
-.lock-wscript
-
-# Project
-.idea
-*.iml
 .DS_Store
 
 # Compiled files

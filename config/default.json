@@ -7,7 +7,11 @@
         "Port": 3000
     },
     "Database": {
-        "URI": "mongodb://gapsapp:Lutef1sk@ds111178.mlab.com:11178/lifetech"
+        "URI": "ds111178.mlab.com",
+        "Port":"11178",
+        "Username":"gapsapp",
+        "Password":"Lutef1sk",
+        "DatabaseName":"lifetech"
     },
     "Logging": {
         "Level": "info"
