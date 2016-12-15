@@ -8,19 +8,25 @@ var config = require('config')
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 
-log.debug('NODE_ENV: ' + process.env.NODE_ENV)
-
 log.debug(JSON.stringify(config))
 
-describe('Database Tests', function() {
-    describe('Connection Security', function() {
-        it('should connect successfully', function() {
-            return expect(Promise.resolve(db.connect.bind(db, config))).to.eventually.not.throw(Error)
-        }),
+describe('Database Tests', function () {
+    describe('Connection Security', function () {
+        it('should connect successfully', function () {
+            return expect(Promise.resolve(db.connect.bind(db, config)))
+                .to
+                .eventually
+                .not
+                .throw(Error)
+        })
+
         db.close()
-        it('should fail to connect with bad credentials', function() {
+        it('should fail to connect with bad credentials', function () {
             config.Database.Username = 'wrong_name'
-            return expect(Promise.resolve(db.connect.bind(db, config))).to.eventually.throw(Error)
+            return expect(Promise.resolve(db.connect.bind(db, config)))
+                .to
+                .eventually
+                .throw(Error)
         })
     })
 })
