@@ -1,0 +1,17 @@
+{
+  "name": "gapsapp",
+  "description": "GAPS Diet Client App",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rlexvold/gapsapp"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "chai": "*",
+    "chai-as-promised": "^6.0.0",
+    "mocha": "*"
+  },
+  "license": "MIT"
+}
