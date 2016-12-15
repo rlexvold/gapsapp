@@ -3,7 +3,7 @@ var describe = require('mocha').describe
 var it = require('mocha').it
 var chai = require('chai')
 var expect = chai.expect
-var db = require('../server/db/mongo')
+var db = require('../db/mongo')
 var config = require('config')
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
