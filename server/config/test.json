@@ -7,9 +7,10 @@
       "DatabaseName": "lifetech"
   },
   "Server": {
+      "Url" : "http://localhost",
       "Port": 3000
   },
   "Logging": {
-      "Level": "trace"
+      "Level": "warn"
   }
 }
