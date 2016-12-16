@@ -1,24 +1,28 @@
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
-var log = require('../utils/logger')
+var log = require.main.require('./utils/logger')
 var assert = require('assert')
+var food = require.main.require('./db/food')
 
 function loadApi(app, db) {
     assert.notEqual(null, db)
     assert.notEqual(null, app)
 
     /**
-     * GET /api/foods
+     * GET /api/phase
      */
     app.get('/api/phase', function (req, res, next) {
         var params = req.query
         var phase = 7
+        var foods
+
         if (params.phase) {
             phase = params.phase
         }
         log.info('Phase: ' + phase)
-        return res.send({
-            phase: phase
-        })
+
+        foods = food.getFoodsByPhase(phase)
+        log.debug('Got foods for phase: ' + phase, foods)
+        return res.status(200).send(foods)
     })
 
     /**
@@ -26,9 +30,7 @@ function loadApi(app, db) {
      * Returns the total number of foods.
      */
     app.get('/api/foodlist/count', function (req, res, next) {
-        res.send({
-            count: 1
-        })
+        res.status(200).send(food.foodCount())
     })
 
     /**
@@ -36,7 +38,7 @@ function loadApi(app, db) {
      * Looks up a character by name. (case-insensitive)
      */
     app.get('/api/foods/search', function (req, res, next) {
-        return res.send({
+        return res.status(200).send({
             foodName: 'food'
         })
     })
@@ -47,9 +49,7 @@ function loadApi(app, db) {
      */
     app.get('/api/food', function (req, res, next) {
         var id = req.params.id
-        return res.send({
-            id: id
-        })
+        return res.status(200).send(food.findFoodById(id))
     })
 
 
@@ -66,9 +66,7 @@ function loadApi(app, db) {
             phase: phase,
             name: foodName
         }
-        return res.send({
-            food: food
-        })
+        return res.status(200).send(food.addFood(food))
     })
 }
 

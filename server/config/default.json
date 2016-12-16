@@ -4,14 +4,15 @@
         "Domain": "lifetech.auth0.com"
     },
     "Server": {
+        "Url": "http://localhost",
         "Port": 3000
     },
     "Database": {
         "URI": "ds111178.mlab.com",
-        "Port":"11178",
-        "Username":"gapsapp",
-        "Password":"Lutef1sk",
-        "DatabaseName":"lifetech"
+        "Port": "11178",
+        "Username": "gapsapp",
+        "Password": "Lutef1sk",
+        "DatabaseName": "lifetech"
     },
     "Logging": {
         "Level": "debug"

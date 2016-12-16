@@ -1,7 +1,6 @@
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
 var log = require('./utils/logger')
 var express = require('express')
-var morgan = require('morgan')
 var config = require('config')
 var db = require('./db/mongo')
 var foodApi = require('./rest/foodApi')
@@ -10,10 +9,6 @@ var bodyParser = require('body-parser')
 var server
 
 var app = express()
-
-app.use(morgan('combine', {
-    stream: log.stream
-}))
 
 log.debug('NODE_ENV: ' + app.get('env'))
 
@@ -31,22 +26,20 @@ db.connect(config)
 
 foodApi.loadApi(app, db)
 
-// development error handler will print stacktrace
-if (app.get('env') === 'development') {
+if (app.get('env') === 'production') {
+    // production error handler no stacktraces leaked to user
     app.use(function (err, req, res, next) {
-        res.status(err.status || 500)
-        res.render('error', {
+        res.status(err.status || 500).send({
             message: err.message,
-            error: err
+            error: {}
         })
     })
 } else {
-    // production error handler no stacktraces leaked to user
+    // development error handler will print stacktrace
     app.use(function (err, req, res, next) {
-        res.status(err.status || 500)
-        res.render('error', {
+        res.status(err.status || 500).send({
             message: err.message,
-            error: {}
+            error: err
         })
     })
 }
