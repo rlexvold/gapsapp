@@ -21,8 +21,7 @@
     "debug": "*",
     "express": "*",
     "express-logging": "*",
-    "mongodb": "*",
-    "morgan": "*"
+    "mongodb": "*"
   },
   "devDependencies": {
     "chai": "*",
