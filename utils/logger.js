@@ -1,8 +1,14 @@
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
-let log = require('bristol')
+var config = require('config')
+var log = require('bristol')
 
-let severity = 'debug'
+var severity = config.Logging.Level || 'debug'
 
 log.addTarget('console').withFormatter('human').withLowestSeverity(severity)
 
 module.exports = log
+module.exports.stream = {
+    write: function (message, encoding) {
+        log.info(message, encoding)
+    }
+}

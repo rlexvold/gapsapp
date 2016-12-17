@@ -8,11 +8,14 @@ let bodyParser = require('body-parser')
 let compression = require('compression')
 let favicon = require('serve-favicon')
 let log = require('./utils/logger')
+let config = require('config')
+let util = require('util')
 let async = require('async')
 let colors = require('colors')
 let mongoose = require('mongoose')
 let request = require('request')
 let React = require('react')
+let expressLogging = require('express-logging')
 let ReactDOM = require('react-dom/server')
 let Router = require('react-router')
 let swig = require('swig')
@@ -23,13 +26,24 @@ let routes = require('./app/routes')
 let Foods = require('./models/food')
 
 let app = express()
+app.use(expressLogging(log))
+log.debug('NODE_ENV: ' + app.get('env'))
 
-mongoose.connect('mongodb://gapsapp:Lutef1sk@ds111178.mlab.com:11178/lifetech')
+log.debug(JSON.stringify(config))
+
+var connectString
+if (config.Database.Username) {
+    connectString = util.format('mongodb://%s:%s@%s:%s/%s', config.Database.Username, config.Database.Password, config.Database.URI, config.Database.Port, config.Database.DatabaseName)
+} else {
+    connectString = util.format('mongodb://%s:%s/%s', config.Database.URI, config.Database.Port, config.Database.DatabaseName)
+}
+
+mongoose.connect(connectString)
 mongoose.connection.on('error', function () {
     log.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red)
 })
 
-app.set('port', 3000)
+app.set('port', config.Server.Port || 3000)
 app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
