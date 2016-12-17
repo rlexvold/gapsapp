@@ -1,11 +1,11 @@
 /*eslint no-unused-vars: 0*/
 /*eslint no-undef: 0 */
 import React from 'react'
-import {Link} from 'react-router'
-import {isEqual} from 'underscore'
+import { Link } from 'react-router'
+import { isEqual } from 'underscore'
 import FoodListStore from '../stores/FoodListStore'
 import FoodListActions from '../actions/FoodListActions'
-let log = '../../utils/logger'
+import log from '../../utils/logger'
 
 class FoodList extends React.Component {
     constructor(props) {
@@ -47,22 +47,22 @@ class FoodList extends React.Component {
                         </span>
                         <div className='pull-left thumb-lg'>
                             <Link to={'/food?_id=' + food._id}>
-                                <img className='media-object' src='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg'/>
+                                <img className='media-object' src='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg' />
                             </Link>
                         </div>
                         <div className='media-body'>
                             <small>
                                 Name:
                                 <strong>{food.name}</strong>
-                            </small><br/>
+                            </small><br />
                             <small>
                                 Category:
                                 <strong>{food.category}</strong>
-                            </small><br/>
+                            </small><br />
                             <small>Phase:
                                 <strong>
                                     {food.phase}</strong>
-                            </small><br/>
+                            </small><br />
                         </div>
                     </div>
                 </div>

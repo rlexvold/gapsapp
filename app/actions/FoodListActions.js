@@ -1,6 +1,6 @@
 /*global $ */
 import alt from '../alt'
-let log = '../../utils/logger'
+import log from '../../utils/logger'
 
 class FoodListActions {
     constructor() {
@@ -22,7 +22,10 @@ class FoodListActions {
         }
 
         log.debug('Calling url, params', url, params)
-        $.ajax({url: url, data: params}).done((data) => {
+        $.ajax({
+            url: url,
+            data: params
+        }).done((data) => {
             log.debug('Success getting foods: ', data)
             this.actions.getFoodsSuccess(data)
         }).fail((jqXhr) => {

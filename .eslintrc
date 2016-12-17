@@ -15,6 +15,10 @@
     },
     "plugins": [
         // e.g. "react" (must run `npm install eslint-plugin-react` first)
+        "react",
+        "chai-expect",
+        "mocha",
+        "mongodb"
     ],
     "parserOptions": {
         "ecmaVersion": 6,

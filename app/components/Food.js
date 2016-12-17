@@ -48,21 +48,21 @@ class Food extends React.Component {
         return (
             <div className='container'>
                 <div className='profile-img'>
-                    <a className='magnific-popup' href='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg'><img src='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg'/></a>
+                    <a className='magnific-popup' href='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg'><img src='https://upload.wikimedia.org/wikipedia/commons/c/c9/-Insert_image_here-.svg' /></a>
                 </div>
                 <div className='media-body'>
                     <small>
                         Name:
                         <strong>{this.state.name}</strong>
-                    </small><br/>
+                    </small><br />
                     <small>
                         Category:
                         <strong>{this.state.category}</strong>
-                    </small><br/>
+                    </small><br />
                     <small>Phase:
                         <strong>
                             {this.state.phase}</strong>
-                    </small><br/>
+                    </small><br />
                 </div>
             </div>
         )
