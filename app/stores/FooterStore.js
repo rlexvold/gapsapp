@@ -1,10 +1,10 @@
-import alt from '../alt';
-import FooterActions from '../actions/FooterActions';
+import alt from '../alt'
+import FooterActions from '../actions/FooterActions'
 
 class FooterStore {
     constructor() {
-        this.bindActions(FooterActions);
+        this.bindActions(FooterActions)
     }
 }
 
-export default alt.createStore(FooterStore);
+export default alt.createStore(FooterStore)

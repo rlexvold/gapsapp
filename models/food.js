@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 
 var foodSchema = new mongoose.Schema({
-    _id: {
+    id: {
         type: String,
         unique: true,
         index: true

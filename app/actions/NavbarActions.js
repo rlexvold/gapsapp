@@ -1,6 +1,8 @@
 /*global $ */
 import alt from '../alt'
-import {assign} from 'underscore'
+import {
+    assign
+} from 'underscore'
 
 class NavbarActions {
     constructor() {
@@ -22,7 +24,9 @@ class NavbarActions {
     }
 
     getFoodCount() {
-        $.ajax({url: '/api/foodlist/count'}).done((data) => {
+        $.ajax({
+            url: '/api/foodlist/count'
+        }).done((data) => {
             this.actions.getFoodCountSuccess(data)
         }).fail((jqXhr) => {
             this.actions.getFoodCountFail(jqXhr)

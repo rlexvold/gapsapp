@@ -1,3 +1,5 @@
+/*eslint no-unused-vars: 0*/
+/*eslint no-undef: 0 */
 import React from 'react'
 import {Link} from 'react-router'
 import FooterStore from '../stores/FooterStore'

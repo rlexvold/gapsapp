@@ -1,9 +1,9 @@
-import alt from '../alt';
+import alt from '../alt'
 
 class FooterActions {
     constructor() {
-        this.generateActions();
+        this.generateActions()
     }
 }
 
-export default alt.createActions(FooterActions);
+export default alt.createActions(FooterActions)

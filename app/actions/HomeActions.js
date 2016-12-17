@@ -1,9 +1,9 @@
-import alt from '../alt';
+import alt from '../alt'
 
 class HomeActions {
     constructor() {
-        this.generateActions();
+        this.generateActions()
     }
 }
 
-export default alt.createActions(HomeActions);
+export default alt.createActions(HomeActions)

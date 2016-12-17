@@ -24,9 +24,9 @@ class AddFood extends React.Component {
     handleSubmit(event) {
         event.preventDefault()
 
-        var name = this.state.name.trim()
-        var category = this.state.category
-        var phase = this.state.phase
+        let name = this.state.name.trim()
+        let category = this.state.category
+        let phase = this.state.phase
 
         if (!name) {
             AddFoodActions.invalidName()
