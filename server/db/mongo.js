@@ -2,7 +2,6 @@ var log = require.main.require('./utils/logger')
 var util = require('util')
 var assert = require('assert')
 var MongoClient = require('mongodb').MongoClient
-var food = require.main.require('./db/food')
 
 var db
 var client = new MongoClient()
@@ -23,7 +22,6 @@ function connect(config) {
         assert.equal(null, err)
         log.debug('Connection successful')
         db = database
-        food.init(db)
     })
 }
 

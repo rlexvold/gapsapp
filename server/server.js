@@ -6,9 +6,11 @@ var db = require('./db/mongo')
 var foodApi = require('./rest/foodApi')
 var compression = require('compression')
 var bodyParser = require('body-parser')
+var expressLogging = require('express-logging')
 var server
 
 var app = express()
+app.use(expressLogging(log))
 
 log.debug('NODE_ENV: ' + app.get('env'))
 
@@ -24,7 +26,7 @@ app.use(bodyParser.urlencoded({
 log.debug('Connect to database...')
 db.connect(config)
 
-foodApi.loadApi(app, db)
+foodApi.loadApi(app)
 
 if (app.get('env') === 'production') {
     // production error handler no stacktraces leaked to user

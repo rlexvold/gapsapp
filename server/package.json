@@ -20,6 +20,7 @@
     "config": "*",
     "debug": "*",
     "express": "*",
+    "express-logging": "*",
     "mongodb": "*",
     "morgan": "*"
   },

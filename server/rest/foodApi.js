@@ -1,72 +1,63 @@
 /*eslint no-unused-vars: ["error", { "args": "none" }]*/
 var log = require.main.require('./utils/logger')
-var assert = require('assert')
-var food = require.main.require('./db/food')
+var db = require.main.require('./db/mongo')
+var ObjectID = require('mongodb').ObjectID
+var apiUtils = require.main.require('./rest/apiUtils')
 
-function loadApi(app, db) {
-    assert.notEqual(null, db)
-    assert.notEqual(null, app)
+var collection
 
+function loadCollection() {
+    if (!collection) {
+        log.debug('loading food collection')
+        collection = db.getCollection('food')
+    }
+}
+
+function loadApi(app) {
     /**
-     * GET /api/phase
+     * GET /api/food
+     * Get one or more foods based on search criteria
      */
-    app.get('/api/phase', function (req, res, next) {
-        var params = req.query
-        var phase = 7
-        var foods
+    app.get('/api/food', function (req, res, next) {
+        var query = req.query
+        log.debug('query params: ' + JSON.stringify(req.query))
 
-        if (params.phase) {
-            phase = params.phase
+        if (query.query) {
+            log.debug('Converting query to JSON: ' + query.query)
+            query = JSON.parse(query.query)
+            log.debug('Query updated: ' + JSON.stringify(query))
         }
-        log.info('Phase: ' + phase)
-
-        foods = food.getFoodsByPhase(phase)
-        log.debug('Got foods for phase: ' + phase, foods)
-        return res.status(200).send(foods)
+        loadCollection()
+        collection.find(query).toArray(function (err, results) {
+            apiUtils.processResponse(res, results, 200, err, 'Failed to find food')
+        })
     })
 
     /**
      * GET /api/foods/count
      * Returns the total number of foods.
      */
-    app.get('/api/foodlist/count', function (req, res, next) {
-        res.status(200).send(food.foodCount())
-    })
-
-    /**
-     * GET /api/foods/search
-     * Looks up a character by name. (case-insensitive)
-     */
-    app.get('/api/foods/search', function (req, res, next) {
-        return res.status(200).send({
-            foodName: 'food'
+    app.get('/api/food/count', function (req, res, next) {
+        log.debug('Food count')
+        loadCollection()
+        collection.count(function (err, count) {
+            log.debug('count return')
+            apiUtils.processResponse(res, count, 200, err, 'Failed to get count')
         })
     })
-
-    /**
-     * GET /api/foods/:id
-     *
-     */
-    app.get('/api/food', function (req, res, next) {
-        var id = req.params.id
-        return res.status(200).send(food.findFoodById(id))
-    })
-
 
     /**
      * POST /api/food
      * Adds new food to the database.
      */
     app.post('/api/food', function (req, res, next) {
-        var category = req.body.category
-        var foodName = req.body.name
-        var phase = req.body.phase
-        var food = {
-            category: category,
-            phase: phase,
-            name: foodName
-        }
-        return res.status(200).send(food.addFood(food))
+        var food = req.body
+        food.id = new ObjectID()
+
+        loadCollection()
+        collection.insertOne(food, function (err, doc) {
+            apiUtils.processResponse(res, doc.ops[0], 201, err, 'Failed to add food')
+        })
     })
 }
 
