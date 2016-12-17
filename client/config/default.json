@@ -1,0 +1,16 @@
+{
+    "Auth": {
+        "ClientID": "LYcbp3kFFNrTdgkQT7BbMXiJfIG898bF",
+        "Domain": "lifetech.auth0.com"
+    },
+    "Server": {
+        "Url": "http://localhost",
+        "Port": 3001
+    },
+    "Data": {
+        "URI": "http://localhost:3000"
+    },
+    "Logging": {
+        "Level": "debug"
+    }
+}
