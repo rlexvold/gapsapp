@@ -11,8 +11,8 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=heroku node server.js",
-    "dev": "NODE_ENV=development node server.js"
+    "start": "NODE_ENV=development CONFIG=development,localdb node server.js",
+    "dev": "NODE_ENV=development CONFIG=development,localdb node server.js"
   },
   "babel": {
     "presets": [
@@ -51,7 +51,12 @@
     "babel-cli": "^6.18.0",
     "babel-core": "^6.1.19",
     "babel-preset-es2015": "^6.18.0",
-    "babel-preset-react": "^6.1.18"
+    "babel-preset-react": "^6.1.18",
+    "eslint": "^3.12.2",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-mocha": "^4.7.0",
+    "eslint-plugin-mongodb": "^0.2.4",
+    "eslint-plugin-react": "^6.8.0"
   },
   "license": "MIT",
   "resolutions": {

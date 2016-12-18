@@ -1,16 +1,5 @@
 {
-  "Database": {
-      "URI": "localhost",
-      "Port": "27017",
-      "Username": "",
-      "Password": "",
-      "DatabaseName": "lifetech"
-  },
-  "Server": {
-      "Url" : "http://localhost",
-      "Port": 3000
-  },
-  "Logging": {
-      "Level": "warn"
-  }
+    "Logging": {
+        "Level": "warn"
+    }
 }

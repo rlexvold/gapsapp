@@ -8,7 +8,7 @@ let bodyParser = require('body-parser')
 let compression = require('compression')
 let favicon = require('serve-favicon')
 let log = require('./utils/logger')
-let config = require('config')
+let appConfig = require('./config/appConfig')
 let util = require('util')
 let async = require('async')
 let colors = require('colors')
@@ -25,16 +25,19 @@ let routes = require('./app/routes')
 let apiUtil = require('./rest/ApiUtils')
 
 let app = express()
+    /*eslint no-process-env:0*/
+let options = appConfig.loadConfig(process.env.CONFIG)
+log.init(options)
 app.use(expressLogging(log))
 log.debug('NODE_ENV: ' + app.get('env'))
 
-log.debug(JSON.stringify(config))
+log.debug('Final options: ' + JSON.stringify(options))
 
 
 log.debug('Connect to database...')
-db.connect(config)
+db.connect(options)
 
-app.set('port', config.Server.Port || 3000)
+app.set('port', options.Server.Port || 3000)
 app.use(compression())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({

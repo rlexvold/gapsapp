@@ -5,8 +5,5 @@
         "Username": "",
         "Password": "",
         "DatabaseName": "lifetech"
-    },
-    "Logging": {
-        "Level": "trace"
     }
 }
