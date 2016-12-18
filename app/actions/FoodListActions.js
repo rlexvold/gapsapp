@@ -9,7 +9,7 @@ class FoodListActions {
 
     getFoods(payload) {
         log.debug('getFoods: ' + payload)
-        let url = '/api/phase'
+        let url = '/api/food'
         let params = {
             phase: 7
         }

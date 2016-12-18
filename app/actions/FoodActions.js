@@ -8,7 +8,7 @@ class FoodActions {
 
     getFood(FoodId) {
         $.ajax({
-            url: '/api/food?id=' + FoodId
+            url: '/api/food?query?id=' + FoodId
         }).done((data) => {
             this.actions.getFoodSuccess(data)
         }).fail((jqXhr) => {

@@ -11,9 +11,9 @@ class AddFoodActions {
             type: 'POST',
             url: '/api/food',
             data: {
-                name: name,
-                category: category,
-                phase: phase
+                'name': name,
+                'category': category,
+                'phase': Number(phase)
             }
         }).done((data) => {
             this.actions.addFoodSuccess(data.message)

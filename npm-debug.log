@@ -12,10 +12,10 @@
 8 verbose lifecycle gapsapp@0.0.1~dev: unsafe-perm in lifecycle true
 9 verbose lifecycle gapsapp@0.0.1~dev: PATH: /Users/rlexvold/.node_modules_global/lib/node_modules/npm/bin/node-gyp-bin:/Users/rlexvold/git/gapsapp/node_modules/.bin:/usr/local/sbin:/Users/rlexvold/.node_modules_global/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/rlexvold/dse/bin
 10 verbose lifecycle gapsapp@0.0.1~dev: CWD: /Users/rlexvold/git/gapsapp
-11 silly lifecycle gapsapp@0.0.1~dev: Args: [ '-c', 'NODE_ENV=development babel-node server.js' ]
+11 silly lifecycle gapsapp@0.0.1~dev: Args: [ '-c', 'NODE_ENV=development node server.js' ]
 12 silly lifecycle gapsapp@0.0.1~dev: Returned: code: 1  signal: null
 13 info lifecycle gapsapp@0.0.1~dev: Failed to exec dev script
-14 verbose stack Error: gapsapp@0.0.1 dev: `NODE_ENV=development babel-node server.js`
+14 verbose stack Error: gapsapp@0.0.1 dev: `NODE_ENV=development node server.js`
 14 verbose stack Exit status 1
 14 verbose stack     at EventEmitter.<anonymous> (/Users/rlexvold/.node_modules_global/lib/node_modules/npm/lib/utils/lifecycle.js:279:16)
 14 verbose stack     at emitTwo (events.js:106:13)
@@ -32,14 +32,14 @@
 19 error node v7.2.1
 20 error npm  v4.0.5
 21 error code ELIFECYCLE
-22 error gapsapp@0.0.1 dev: `NODE_ENV=development babel-node server.js`
+22 error gapsapp@0.0.1 dev: `NODE_ENV=development node server.js`
 22 error Exit status 1
-23 error Failed at the gapsapp@0.0.1 dev script 'NODE_ENV=development babel-node server.js'.
+23 error Failed at the gapsapp@0.0.1 dev script 'NODE_ENV=development node server.js'.
 23 error Make sure you have the latest version of node.js and npm installed.
 23 error If you do, this is most likely a problem with the gapsapp package,
 23 error not with npm itself.
 23 error Tell the author that this fails on your system:
-23 error     NODE_ENV=development babel-node server.js
+23 error     NODE_ENV=development node server.js
 23 error You can get information on how to open an issue for this project with:
 23 error     npm bugs gapsapp
 23 error Or if that isn't available, you can get their info via:

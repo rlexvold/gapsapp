@@ -1,6 +1,5 @@
 import log from '../utils/logger'
 import db from '../db/mongo'
-import ObjectID from 'mongodb'
 
 function handleError(res, err, message) {
     log.error('ERROR: ' + err.message)
@@ -57,8 +56,7 @@ function createGenericApi(app, name) {
      */
     app.post('/api/' + name, function (req, res, next) {
         var item = req.body
-        item.id = new ObjectID()
-
+        log.debug('POST: ' + name + ': ' + JSON.stringify(item))
         db.getCollection(name).insertOne(item, function (err, doc) {
             processResponse(res, doc.ops[0], 201, err, 'Failed to add ' + name)
         })
