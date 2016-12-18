@@ -1,6 +1,6 @@
 /*eslint no-unused-vars: 0*/
 // Babel ES6/JSX Compiler
-require('babel-register')
+require('babel-core/register')
 
 let path = require('path')
 let express = require('express')
@@ -12,7 +12,6 @@ let config = require('config')
 let util = require('util')
 let async = require('async')
 let colors = require('colors')
-let mongoose = require('mongoose')
 let request = require('request')
 let React = require('react')
 let expressLogging = require('express-logging')
@@ -21,9 +20,9 @@ let Router = require('react-router')
 let swig = require('swig')
 let xml2js = require('xml2js')
 let _ = require('underscore')
-
+let db = require('./db/mongo')
 let routes = require('./app/routes')
-let Foods = require('./models/food')
+let apiUtil = require('./rest/ApiUtils')
 
 let app = express()
 app.use(expressLogging(log))
@@ -31,17 +30,9 @@ log.debug('NODE_ENV: ' + app.get('env'))
 
 log.debug(JSON.stringify(config))
 
-var connectString
-if (config.Database.Username) {
-    connectString = util.format('mongodb://%s:%s@%s:%s/%s', config.Database.Username, config.Database.Password, config.Database.URI, config.Database.Port, config.Database.DatabaseName)
-} else {
-    connectString = util.format('mongodb://%s:%s/%s', config.Database.URI, config.Database.Port, config.Database.DatabaseName)
-}
 
-mongoose.connect(connectString)
-mongoose.connection.on('error', function () {
-    log.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red)
-})
+log.debug('Connect to database...')
+db.connect(config)
 
 app.set('port', config.Server.Port || 3000)
 app.use(compression())
@@ -52,113 +43,10 @@ app.use(bodyParser.urlencoded({
 app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
 app.use(express.static(path.join(__dirname, 'public')))
 
-/**
- * GET /api/foods
- */
-app.get('/api/phase', function (req, res, next) {
-    let params = req.query
-    let phase = 7
-    if (params.phase) {
-        phase = params.phase
-    }
-    log.info('Phase: ' + phase)
+apiUtil.createGenericApi(app, 'food')
+apiUtil.createGenericApi(app, 'person')
+apiUtil.createGenericApi(app, 'profile')
 
-    Foods.where('phase').lte(phase).sort('name').exec(function (err, foodList) {
-        if (err) {
-            return next(err)
-        }
-        log.info('Foods found: ' + foodList.length)
-
-        return res.send(foodList)
-    })
-})
-
-/**
- * GET /api/foods/count
- * Returns the total number of foods.
- */
-app.get('/api/foodlist/count', function (req, res, next) {
-    Foods.count({}, function (err, count) {
-        if (err) {
-            return next(err)
-        }
-        res.send({
-            count: count
-        })
-    })
-})
-
-/**
- * GET /api/foods/search
- * Looks up a character by name. (case-insensitive)
- */
-app.get('/api/foods/search', function (req, res, next) {
-    let foodName = new RegExp(req.query.name, 'i')
-
-    Foods.find({
-        name: foodName
-    }, function (err, foods) {
-        if (err) {
-            return next(err)
-        }
-
-        if (!foods) {
-            return res.status(404).send({
-                message: 'Food not found.'
-            })
-        }
-
-        return res.send(foods)
-    })
-})
-
-/**
- * GET /api/foods/:id
- *
- */
-app.get('/api/food', function (req, res, next) {
-    let id = req.params.id
-
-    Foods.findOne({
-        foodId: id
-    }, function (err, food) {
-        if (err) {
-            return next(err)
-        }
-
-        if (!food) {
-            return res.status(404).send({
-                message: 'Food not found.'
-            })
-        }
-
-        return res.send(food)
-    })
-})
-
-/**
- * POST /api/food
- * Adds new food to the database.
- */
-app.post('/api/food', function (req, res, next) {
-    let category = req.body.category
-    let foodName = req.body.name
-    let phase = req.body.phase
-    let food = new Foods({
-        _id: mongoose.Types.ObjectId(),
-        category: category,
-        phase: phase,
-        name: foodName
-    })
-    food.save(function (err) {
-        if (err) {
-            return next(err)
-        }
-        return res.send({
-            message: foodName + ' has been added successfully!'
-        })
-    })
-})
 
 app.use(function (req, res) {
     Router.match({
