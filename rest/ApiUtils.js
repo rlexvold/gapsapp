@@ -1,5 +1,7 @@
+/* eslint no-unused-vars:0 */
 import log from '../utils/logger'
 import db from '../db/mongo'
+let ObjectID = require('mongodb').ObjectID
 
 function handleError(res, err, message) {
     log.error('ERROR: ' + err.message)
@@ -25,7 +27,7 @@ function createGenericApi(app, name) {
          * Get one or more items based on search criteria
          */
     app.get('/api/' + name, function (req, res, next) {
-        var query = req.query
+        let query = req.query
         log.debug('query params: ' + JSON.stringify(req.query))
 
         if (query.query) {
@@ -34,6 +36,21 @@ function createGenericApi(app, name) {
             log.debug('Query updated: ' + JSON.stringify(query))
         }
         db.getCollection(name).find(query).toArray(function (err, results) {
+            processResponse(res, results, 200, err, 'Failed to find food')
+        })
+    })
+
+    /**
+     * GET /api/<name>/:id
+     * Get one item with id
+     */
+    app.get('/api/' + name + '/:id', function (req, res, next) {
+        let id = new ObjectID(req.params.id)
+        log.debug('Finding ' + name + ' with id: ' + id)
+
+        db.getCollection(name).find({
+            _id: id
+        }).toArray(function (err, results) {
             processResponse(res, results, 200, err, 'Failed to find food')
         })
     })
@@ -52,13 +69,41 @@ function createGenericApi(app, name) {
 
     /**
      * POST /api/<name>
-     * Adds new food to the database.
+     * Updates item in the database.
      */
     app.post('/api/' + name, function (req, res, next) {
-        var item = req.body
+        let item = req.body
         log.debug('POST: ' + name + ': ' + JSON.stringify(item))
         db.getCollection(name).insertOne(item, function (err, doc) {
             processResponse(res, doc.ops[0], 201, err, 'Failed to add ' + name)
+        })
+    })
+
+    /**
+     * PUT /api/<name>
+     * Updates item in the database.
+     */
+    app.put('/api/' + name, function (req, res, next) {
+        let item = req.body
+        log.debug('PUT: ' + name + ': ' + JSON.stringify(item))
+        db.getCollection(name).findOneAndUpdate({
+            _id: new ObjectID(item._id)
+        }, item, function (err, doc) {
+            processResponse(res, doc.ops[0], 201, err, 'Failed to update ' + name)
+        })
+    })
+
+    /**
+     * DELETE /api/<name>/:id
+     * Delete item in the database.
+     */
+    app.delete('/api/' + name + '/:id', function (req, res, next) {
+        let id = new ObjectID(req.params.id)
+        log.debug('DELETE: ' + name + ': ' + id)
+        db.getCollection(name).deleteOne({
+            _id: id
+        }, function (err, doc) {
+            processResponse(res, doc.ops[0], 200, err, 'Failed to delete ' + name + ' with id: ' + id)
         })
     })
 }

@@ -1,6 +1,5 @@
 /*global $ */
 import alt from '../alt'
-import log from '../../utils/logger'
 
 class FoodListActions {
     constructor() {
@@ -8,25 +7,13 @@ class FoodListActions {
     }
 
     getFoods(payload) {
-        log.debug('getFoods: ' + payload)
-        let url = '/api/food'
-        let params = {
-            phase: 7
-        }
+        let queryString = '{"phase":{"$lte":' + payload.phase + '}}'
+        let url = '/api/food/query=' + queryString
 
-        if (payload.phase) {
-            params.phase = payload.phase
-        }
-        if (payload.category) {
-            params.category = payload.category
-        }
 
-        log.debug('Calling url, params', url, params)
         $.ajax({
-            url: url,
-            data: params
+            url: url
         }).done((data) => {
-            log.debug('Success getting foods: ', data)
             this.actions.getFoodsSuccess(data)
         }).fail((jqXhr) => {
             this.actions.getFoodsFail(jqXhr)

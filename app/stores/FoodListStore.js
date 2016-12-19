@@ -1,7 +1,6 @@
 /* global toastr */
 import alt from '../alt'
 import FoodListActions from '../actions/FoodListActions'
-let log = '../../utils/logger'
 
 class FoodListStore {
     constructor() {
@@ -10,12 +9,10 @@ class FoodListStore {
     }
 
     getFoodsSuccess(data) {
-        log.debug('onGetCharacterSuccess data:', data)
         this.foods = data
     }
 
     getFoodsFail(jqXhr) {
-        log.debug('onGetCharactersFails')
         toastr.error(jqXhr.responseJSON.message)
     }
 }

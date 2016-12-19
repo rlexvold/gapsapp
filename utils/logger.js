@@ -1,15 +1,11 @@
-/*eslint no-unused-vars: ["error", { "args": "none" }]*/
-var log = require('bristol')
+let log4js = require('log4js')
+var log = log4js.getLogger()
 
 function init(config) {
-    var severity = config.Logging.Level || 'debug'
-    log.addTarget('console').withFormatter('human').withLowestSeverity(severity)
+    let severity = config.Logging.Level || 'debug'
+    let level = log4js.levels.toLevel(severity)
+    log.setLevel(level)
 }
 
 module.exports = log
 module.exports.init = init
-module.exports.stream = {
-    write: function (message, encoding) {
-        log.info(message, encoding)
-    }
-}

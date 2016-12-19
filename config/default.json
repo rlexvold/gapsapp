@@ -15,6 +15,6 @@
         "DatabaseName": "lifetech"
     },
     "Logging": {
-        "Level": "debug"
+        "Level": "warn"
     }
 }

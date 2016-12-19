@@ -1,8 +1,6 @@
 import log from '../utils/logger'
 import util from 'util'
-import assert from 'assert'
 let MongoClient = require('mongodb').MongoClient
-var db
 let client = new MongoClient()
 
 function connect(config) {
@@ -15,27 +13,22 @@ function connect(config) {
     }
     log.debug('Connecting to ' + connectString)
 
-    client.connect(connectString, {
+    return client.connect(connectString, {
         poolSize: 10
-    }, function (err, database) {
-        assert.equal(null, err)
-        log.debug('Connection successful')
-        db = database
     })
 }
 
-function getCollection(collection) {
-    assert.notEqual(null, collection)
-    assert.notEqual(null, db)
-    return db.collection(collection)
-}
 
-function close() {
+function close(db) {
     if (db) {
         log.info('Closing database')
-        db.close()
+        db.close().then(function (result) {
+            log.debug('Successfully closed database: ' + result)
+        }).catch(function (err) {
+            log.error('Error closing database: ' + err)
+        })
+
     }
 }
 module.exports.close = close
 module.exports.connect = connect
-module.exports.getCollection = getCollection

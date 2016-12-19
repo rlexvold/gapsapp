@@ -5,7 +5,6 @@ import { Link } from 'react-router'
 import { isEqual } from 'underscore'
 import FoodListStore from '../stores/FoodListStore'
 import FoodListActions from '../actions/FoodListActions'
-import log from '../../utils/logger'
 
 class FoodList extends React.Component {
     constructor(props) {
@@ -17,7 +16,6 @@ class FoodList extends React.Component {
     componentDidMount() {
         FoodListActions.getFoods(this.props.params)
         FoodListStore.listen(this.onChange)
-        log.debug('componentDidMount', this.props.params)
     }
 
     componentWillUnmount() {
@@ -25,7 +23,6 @@ class FoodList extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        log.debug('componentDidUpdate', this.props.params)
         if (!isEqual(prevProps.params, this.props.params)) {
             FoodListActions.getFoods(this.props.params)
         }
@@ -36,9 +33,7 @@ class FoodList extends React.Component {
     }
 
     render() {
-        log.debug('Found: ' + this.state.foods.length + ' foods')
         let foodList = this.state.foods.map((food, index) => {
-            log.debug('Got a foodlist')
             return (
                 <div key={food._id} className='list-group-item animated fadeIn'>
                     <div className='media'>

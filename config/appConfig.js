@@ -1,10 +1,10 @@
 function loadConfig(environmentList) {
-    let options = require.main.require('./config/default.json')
+    let options = require('./default.json')
     let list = environmentList.split(',')
     for (let i = 0; i < list.length; i++) {
         let environment = list[i]
-        let fileName = './config/' + environment + '.json'
-        let newOptions = require.main.require(fileName)
+        let fileName = './' + environment + '.json'
+        let newOptions = require(fileName)
         options = mergeJSON(options, newOptions)
     }
     return options

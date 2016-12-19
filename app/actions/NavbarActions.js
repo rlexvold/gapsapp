@@ -11,7 +11,7 @@ class NavbarActions {
 
     findFood(payload) {
         $.ajax({
-            url: '/api/foods/search',
+            url: '/api/food/query={"name":' + payload.searchQuery + '}',
             data: {
                 name: payload.searchQuery
             }
@@ -25,7 +25,7 @@ class NavbarActions {
 
     getFoodCount() {
         $.ajax({
-            url: '/api/foodlist/count'
+            url: '/api/food/count'
         }).done((data) => {
             this.actions.getFoodCountSuccess(data)
         }).fail((jqXhr) => {
