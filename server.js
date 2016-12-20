@@ -22,8 +22,10 @@ let log = require('./utils/logger')
 let mongo = require('./db/mongo')
 let routes = require('./app/routes')
 let apiUtil = require('./rest/ApiUtils')
-var db
-
+let webpack = require('webpack')
+let webpackMiddleware = require('webpack-dev-middleware')
+let config = require('./webpack.config.js')
+let db = null
 let app = express()
     /*eslint no-process-env:0*/
 let options = appConfig.loadConfig(process.env.CONFIG)
@@ -32,16 +34,14 @@ log.debug('NODE_ENV: ' + app.get('env'))
 
 log.debug('Final options: ' + JSON.stringify(options))
 
-
 log.debug('Connect to database...')
-mongo.connect(options).then(function (database) {
+mongo.connect(options).then(function(database) {
     log.debug('Connection successful')
     db = database
     startServer()
-}).catch(function (err) {
+}).catch(function(err) {
     log.error('Error connecting to database: ' + err)
 })
-
 
 function startServer() {
 
@@ -53,17 +53,19 @@ function startServer() {
     }))
     app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
     app.use(express.static(path.join(__dirname, 'public')))
+    const compiler = webpack(config)
 
-    apiUtil.createGenericApi(app, 'food')
-    apiUtil.createGenericApi(app, 'person')
-    apiUtil.createGenericApi(app, 'profile')
+    app.use(webpackMiddleware(compiler))
 
+    apiUtil.createGenericApi(app, db, 'food')
+    apiUtil.createGenericApi(app, db, 'person')
+    apiUtil.createGenericApi(app, db, 'profile')
 
-    app.use(function (req, res) {
+    app.use(function(req, res) {
         Router.match({
             routes: routes.default,
             location: req.url
-        }, function (err, redirectLocation, renderProps) {
+        }, function(err, redirectLocation, renderProps) {
             if (err) {
                 res.status(500).send(err.message)
             } else if (redirectLocation) {
@@ -80,7 +82,7 @@ function startServer() {
         })
     })
 
-    app.use(function (err, req, res, next) {
+    app.use(function(err, req, res, next) {
         log.log(err.stack.red)
         res.status(err.status || 500)
         res.send({
@@ -95,14 +97,14 @@ function startServer() {
     let io = require('socket.io')(server)
     let onlineUsers = 0
 
-    io.sockets.on('connection', function (socket) {
+    io.sockets.on('connection', function(socket) {
         onlineUsers++
 
         io.sockets.emit('onlineUsers', {
             onlineUsers: onlineUsers
         })
 
-        socket.on('disconnect', function () {
+        socket.on('disconnect', function() {
             onlineUsers--
             io.sockets.emit('onlineUsers', {
                 onlineUsers: onlineUsers
@@ -110,7 +112,7 @@ function startServer() {
         })
     })
 
-    server.listen(app.get('port'), function () {
+    server.listen(app.get('port'), function() {
         log.info('Express server listening on port ' + app.get('port'))
     })
 }

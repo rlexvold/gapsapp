@@ -1,5 +1,5 @@
-/* global toastr */
 import alt from '../alt'
+import toastr from 'toastr'
 import FoodListActions from '../actions/FoodListActions'
 
 class FoodListStore {

@@ -1,5 +1,5 @@
 node_modules
-bower_components
+babel_cache
 
 # Users Environment Variables
 .lock-wscript

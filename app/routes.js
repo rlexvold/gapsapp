@@ -10,7 +10,7 @@ import AddFood from './components/AddFood'
 export default(
     <Route component={App}>
         <Route path='/' component={Home}/>
-        <Route path='/phase/:phase' component={FoodList}/>
+        <Route path='/food/phase' component={FoodList}/>
         <Route path='/add' component={AddFood}/>
         <Route path='/food' component={Food}/>
     </Route>

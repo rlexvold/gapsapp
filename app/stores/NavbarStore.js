@@ -1,5 +1,5 @@
-/*global toastr */
 import alt from '../alt'
+import toastr from 'toastr'
 import NavbarActions from '../actions/NavbarActions'
 
 class NavbarStore {
@@ -12,7 +12,7 @@ class NavbarStore {
     }
 
     onFindFoodSuccess(payload) {
-        payload.history.pushState(null, '/foods/' + payload.foodId)
+        payload.history.pushState(null, '/food/' + payload.foodId)
     }
 
     onFindFoodFail(payload) {
@@ -35,7 +35,7 @@ class NavbarStore {
     }
 
     onGetFoodCountSuccess(data) {
-        this.totalFoods = data.count
+        this.totalFoods = data
     }
 
     onGetFoodCountFail(jqXhr) {

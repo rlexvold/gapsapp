@@ -25,7 +25,7 @@ class NavbarActions {
 
     getFoodCount() {
         $.ajax({
-            url: '/api/food/count'
+            url: '/api/foodcount'
         }).done((data) => {
             this.actions.getFoodCountSuccess(data)
         }).fail((jqXhr) => {

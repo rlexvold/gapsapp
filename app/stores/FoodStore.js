@@ -1,8 +1,7 @@
-/*global $, toastr */
 /*eslint no-unused-vars: 0*/
 /*eslint no-undef: 0 */
-import {assign, contains} from 'underscore'
 import alt from '../alt'
+import toastr from 'toastr'
 import FoodActions from '../actions/FoodActions'
 
 class FoodStore {
@@ -16,9 +15,9 @@ class FoodStore {
 
     onGetFoodSuccess(data) {
         assign(this, data)
-        let localData = localStorage.getItem('foods')
-            ? JSON.parse(localStorage.getItem('foods'))
-            : {}
+        let localData = localStorage.getItem('food') ?
+            JSON.parse(localStorage.getItem('food')) :
+            {}
         let reports = localData.reports || []
     }
 
