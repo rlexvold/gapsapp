@@ -14,7 +14,7 @@
         "start": "NODE_ENV=development CONFIG=development,localdb node server.js",
         "heroku": "NODE_ENV=development CONFIG=mlab node server.js",
         "predev": "yarn build",
-        "dev": "NODE_ENV=development CONFIG=development,localdb babel-node server.js",
+        "dev": "NODE_ENV=development CONFIG=development,localdb node server.js",
         "build": "NODE_ENV=development node_modules/.bin/webpack",
         "test": "NODE_ENV=development CONFIG=localdb,test node ./node_modules/mocha/bin/mocha"
     },

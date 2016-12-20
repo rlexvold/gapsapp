@@ -22,9 +22,9 @@ let log = require('./utils/logger')
 let mongo = require('./db/mongo')
 let routes = require('./app/routes')
 let apiUtil = require('./rest/ApiUtils')
-let webpack = require('webpack')
-let webpackMiddleware = require('webpack-dev-middleware')
-let config = require('./webpack.config.js')
+    //let webpack = require('webpack')
+    //let webpackMiddleware = require('webpack-dev-middleware')
+    //let config = require('./webpack.config.js')
 let db = null
 let app = express()
     /*eslint no-process-env:0*/
@@ -53,9 +53,9 @@ function startServer() {
     }))
     app.use(favicon(path.join(__dirname, 'public', 'favicon.png')))
     app.use(express.static(path.join(__dirname, 'public')))
-    const compiler = webpack(config)
+        //    const compiler = webpack(config)
 
-    app.use(webpackMiddleware(compiler))
+    //    app.use(webpackMiddleware(compiler))
 
     apiUtil.createGenericApi(app, db, 'food')
     apiUtil.createGenericApi(app, db, 'person')

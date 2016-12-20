@@ -58,8 +58,8 @@ module.exports = {
             },
             mangle: false,
             sourcemap: true,
-            beautify: true,
-            dead_code: true
+            beautify: false,
+            dead_code: false
         })
     ]
 }
