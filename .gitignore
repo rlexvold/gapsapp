@@ -7,4 +7,4 @@ babel_cache
 
 # Compiled files
 public/css
-public/js
+public/js/*.js

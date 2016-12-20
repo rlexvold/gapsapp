@@ -13,6 +13,10 @@
     "scripts": {
         "start": "NODE_ENV=development CONFIG=development,localdb node server.js",
         "heroku": "NODE_ENV=development CONFIG=mlab node server.js",
+        "clean": "rimraf node_modules babel_cache public/js",
+        "preclean-build": "yarn run clean",
+        "clean-build": "yarn install --flat",
+        "postclean-build": "yarn dev",
         "predev": "yarn build",
         "dev": "NODE_ENV=development CONFIG=development,localdb node server.js",
         "build": "NODE_ENV=development node_modules/.bin/webpack",

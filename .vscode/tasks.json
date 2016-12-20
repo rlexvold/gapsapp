@@ -4,6 +4,9 @@
     "version": "0.1.0",
     "command": "yarn",
     "isShellCommand": true,
-    "args": ["dev"],
+    "args": ["clean-build"],
+    "echoCommand": true,
+    "suppressTaskName": true,
+    "promptOnClose": true,
     "showOutput": "always"
 }
