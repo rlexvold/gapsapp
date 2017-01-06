@@ -1,6 +1,6 @@
 {
     "env": {
-        "browser": false, // browser global variables.
+        "browser": true, // browser global variables.
         "node": true, // Node.js global variables and Node.js-specific rules.
         "amd": false, // defines require() and define() as global variables as per the amd spec.
         "mocha": true, // adds all of the Mocha testing global variables.
@@ -11,20 +11,24 @@
         "shelljs": false // shelljs global variables.
     },
     "globals": {
-        "Promise": true
+        "Promise": true,
+        "process": false,
+        "require": false,
+        "define": false,
+        "console": false
     },
     "plugins": [
         // e.g. "react" (must run `npm install eslint-plugin-react` first)
         "react",
         "chai-expect",
-        "mocha",
-        "mongodb"
+        "mocha"
     ],
     "parserOptions": {
         "ecmaVersion": 6,
-        "sourceType": "module",
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "classes": true,
+            "modules": true
         }
     },
     "rules": {
@@ -253,6 +257,10 @@
         "max-params": 0,
         "max-statements": 0,
         "no-bitwise": 0,
-        "no-plusplus": 0
+        "no-plusplus": 0,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "react/react-in-jsx-scope": 2
+
     }
 }
