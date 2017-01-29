@@ -1,9 +1,0 @@
-{
-    "Database": {
-        "URI": "localhost",
-        "Port": "27017",
-        "Username": "",
-        "Password": "",
-        "DatabaseName": "lifetech"
-    }
-}
